@@ -36,7 +36,7 @@ const validateMail = (req, res, next) => {
     else next();
 };
 
-userRouter.get('/', [validateMail, validatePassword], getUserHandler);
+userRouter.get('/getUser', [validateMail, validatePassword], getUserHandler);
 userRouter.post('/', [validateName, validateLast_name, validateMail, validatePassword], createUserHandler);
 
 module.exports = userRouter;
