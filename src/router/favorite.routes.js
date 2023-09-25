@@ -2,6 +2,7 @@ const { Router } = require('express');
 const favoriteRouter = Router();
 const createFavoriteHandler = require('../handler/createFavoriteHandler');
 const deleteFavoriteHandler = require('../handler/deleteFavoriteHandler');
+const getFavoritesHandler = require('../handler/getFavoritesHandler');
 
 const validateImdbId = (req, res, next) => {
     const { imdbID } = req.body;
@@ -15,7 +16,8 @@ const validateUserId = (req, res, next) => {
     next();
 };
 
-favoriteRouter.post('/', [validateImdbId, validateUserId], createFavoriteHandler);
-favoriteRouter.delete('/', [validateImdbId, validateUserId], deleteFavoriteHandler);
+favoriteRouter.get('/getFavorites', validateUserId, getFavoritesHandler);
+favoriteRouter.post('/createFavorites', [validateImdbId, validateUserId], createFavoriteHandler);
+favoriteRouter.delete('/deleteFavorites', [validateImdbId, validateUserId], deleteFavoriteHandler);
 
 module.exports = favoriteRouter;
