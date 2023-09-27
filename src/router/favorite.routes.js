@@ -10,13 +10,19 @@ const validateImdbId = (req, res, next) => {
     next();
 };
 
+const validateUserIdGet = (req, res, next) => {
+    const { UserId } = req.query;
+    if (!UserId) throw Error('Envie un ID de usuario para continuar');
+    next();
+};
+
 const validateUserId = (req, res, next) => {
     const { UserId } = req.body;
     if (!UserId) throw Error('Envie un ID de usuario para continuar.');
     next();
 };
 
-favoriteRouter.get('/getFavorites', validateUserId, getFavoritesHandler);
+favoriteRouter.get('/getFavorites/:UserId', validateUserIdGet, getFavoritesHandler);
 favoriteRouter.post('/createFavorites', [validateImdbId, validateUserId], createFavoriteHandler);
 favoriteRouter.delete('/deleteFavorites', [validateImdbId, validateUserId], deleteFavoriteHandler);
 
