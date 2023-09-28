@@ -11,7 +11,7 @@ const validateImdbId = (req, res, next) => {
 };
 
 const validateUserIdGet = (req, res, next) => {
-    const { UserId } = req.query;
+    const { UserId } = req.params;
     if (!UserId) throw Error('Envie un ID de usuario para continuar');
     next();
 };

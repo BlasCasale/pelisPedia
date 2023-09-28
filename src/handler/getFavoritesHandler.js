@@ -2,7 +2,7 @@ const getFavorites = require('../controller/getFavorites');
 
 const getFavoritesHandler = async (req, res) => {
     try {
-        const { UserId } = req.query;
+        const { UserId } = req.params;
         const userFavorites = await getFavorites(UserId);
         res.status(200).json(userFavorites);
     } catch (error) {
